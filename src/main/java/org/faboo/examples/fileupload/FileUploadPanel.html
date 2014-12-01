@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<body>
+<wicket:panel>
+
+    <hr>
+    <span wicket:id="maxFilesToUpload"></span>
+    <span>culminated upload size:</span><span wicket:id="sum"></span>
+    <hr>
+    <ul>
+        <li wicket:id="uploads">
+            <span wicket:id="name">a name</span> <a wicket:id="remove">Remove</a>
+        </li>
+    </ul>
+
+    <form wicket:id="form">
+        <label>upload file</label>
+        <input wicket:id="upload" type="file" >
+        <input wicket:id="submit" type="submit">
+    </form>
+
+    <hr>
+</wicket:panel>
+</body>
+</html>
