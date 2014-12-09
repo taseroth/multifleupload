@@ -4,10 +4,10 @@ import org.apache.wicket.markup.html.GenericWebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.faboo.examples.fileupload.FileUploadPanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,26 +35,13 @@ public class HomePage extends GenericWebPage<HomePage> {
         nameField.setRequired(true);
         outerForm.add(nameField);
 
-        Form innerForm = new Form("inner-form");
-        outerForm.add(innerForm);
-
-        final FileUploadField fileUploadField = new FileUploadField("fileUpload");
-        fileUploadField.setRequired(true);
-        innerForm.add(fileUploadField);
-        innerForm.add(new SubmitLink("inner-submit") {
-            @Override
-            public void onSubmit() {
-                super.onSubmit();
-                logger.debug("inner:provided file name: {}", fileUploadField.getFileUpload().getClientFileName());
-            }
-
-        });
+        FileUploadPanel fileUploadPanel = new FileUploadPanel("fileupload", 4);
+        outerForm.add(fileUploadPanel);
 
         outerForm.add(new SubmitLink("submit-outer"){
             @Override
             public void onSubmit() {
                 super.onSubmit();
-                logger.debug("outer:provided file name: {}", fileUploadField.getFileUpload().getClientFileName());
             }
         });
 
