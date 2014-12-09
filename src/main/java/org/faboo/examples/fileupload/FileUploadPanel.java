@@ -11,6 +11,7 @@ import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.RefreshingView;
 import org.apache.wicket.markup.repeater.util.ModelIteratorAdapter;
 import org.apache.wicket.model.*;
+import org.faboo.examples.WicketApplication;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,8 +118,11 @@ public class FileUploadPanel extends Panel {
         try {
             System.out.println("new file size" + upload.getSize());
             File tempFile = upload.writeToTempFile();
-            tempFile.deleteOnExit();
-            uploads.add(new UploadData(upload.getClientFileName(), tempFile));
+            System.out.println("created temp file: " + tempFile.getAbsolutePath());
+            UploadData uploadData = new UploadData(upload.getClientFileName(), tempFile);
+            uploads.add(uploadData);
+            WicketApplication.get().getResourceSettings().getFileCleaner().track(tempFile,uploadData);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

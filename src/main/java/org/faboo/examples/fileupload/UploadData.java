@@ -9,11 +9,11 @@ import java.io.Serializable;
 public class UploadData implements Serializable {
 
     private final String name;
-    private final File file;
+    private final String file;
 
     public UploadData(String name, File tempFile) {
         this.name = name;
-        this.file = tempFile;
+        this.file = tempFile.getAbsolutePath();
     }
 
     public String getName() {
@@ -21,6 +21,6 @@ public class UploadData implements Serializable {
     }
 
     public File getFile() {
-        return file;
+        return new File(file);
     }
 }
